@@ -32,7 +32,7 @@ def deploy(branch=None, staging=False):
     _update_config_templates(configs, site_folder, deploy_folder,
                              django_project_folder, env.host, service_username)
     _copy_nginx_config(configs[0], env.host)
-    _copy_supervisord_configs(configs_folder+'/supervisord')
+    _copy_supervisord_configs(configs_folder+'/supervisord', env.host)
     _create_log_dirs(site_folder)
     _create_user(service_username)
     _update_owner(site_folder, service_username)
@@ -115,8 +115,8 @@ def _copy_nginx_config(config_file, site_name):
 def _copy_supervisord_upstart_config(config_file):
     sudo('cp '+config_file+' /etc/init/supervisord.conf')
 
-def _copy_supervisord_configs(supervisor_config_dir):
-    config_dir = '/etc/supervisor/conf.d/{}'.format(DJANGO_PROJECT_NAME)
+def _copy_supervisord_configs(supervisor_config_dir, site_name):
+    config_dir = '/etc/supervisor/conf.d/{}'.format(site_name)
     sudo('mkdir {}'.format(config_dir))
     sudo('cp '+supervisor_config_dir+'/*.conf'+' '+config_dir+'/')
 
