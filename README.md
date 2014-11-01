@@ -1,7 +1,9 @@
 django-deploy-tools
 ===================
 This is fabric script for painless django deployment. My setup uses nginx, supervisord, gunicorn, celery and celerycam. This script is oriented on bitbucket Git hosting.
+
 Everything is done with newly created user named corresponding to the host name deploying to.
+
 There are 2 fabric tasks: deployment and update\_source.
 
 # Deployment
@@ -20,7 +22,7 @@ This will run full deployment routine:
 
 # Source code update
 ```
-fab update\_source:host=username@host
+fab update_source:host=username@host
 ```
 This will run short routine to update code base and corresponding things:
  * Update from Git repo
